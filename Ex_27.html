@@ -2,17 +2,69 @@
 <html>
 <head>
   <style>
-    .container {display: flex;}
-    .box 
+
+    /* 外框 */
+    .container 
     {
-      background: lightblue;
-      margin: 5px;
-      height: 100px;
+      display: flex;
+      gap: 20px;
+    }
+    /* 每一個卡片 */
+    .card 
+    {
+      background: #eee;
+      padding: 10px;
+      border-radius: 10px;
+      width: 45%;
+    }
+    /* 上面綠色區塊 */
+    .header 
+    {
+      background: #9acd32;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+    /* 中間藍色區塊 */
+    .content 
+    {
+      display: flex;
+      gap: 10px;
+    }
+    .content div 
+    {
+      background: #17a2a8;
+      height: 80px;
       flex: 1;
     }
+    /* 下面灰色區塊 */
+    .footer 
+    {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .footer div 
+    {
+      background: #ccc;
+      height: 50px;
+      flex: 1;
+    }
+
     @media (max-width: 480px) 
     {
       .container 
+      {
+        flex-direction: column;   /* 由橫變直 */
+      }
+      .card 
+      {
+        width: 100%;
+      }
+      .content 
+      {
+        flex-direction: column;   /* 中間變直排 */
+      }
+      .footer 
       {
         flex-direction: column;
       }
@@ -21,8 +73,31 @@
 </head>
 
 <body>
-  <div class="container"></div>
-  <div class="box"></div>
-  <div class="box"></div>
+  <div class="container">
+    <div class="card">
+      <div class="header"></div>
+      <div class="content">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="footer">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="header"></div>
+      <div class="content">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="footer">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
