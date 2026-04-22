@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .container {display: flex;}
+    .box 
+    {
+      background: lightblue;
+      margin: 5px;
+      height: 100px;
+      flex: 1;
+    }
+    @media (max-width: 480px) 
+    {
+      .container 
+      {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+</body>
+</html>
