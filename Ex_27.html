@@ -1,103 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <style>
+<meta charset="UTF-8">
 
-    /* 外框 */
-    .container 
-    {
-      display: flex;
-      gap: 20px;
-    }
-    /* 每一個卡片 */
-    .card 
-    {
-      background: #eee;
-      padding: 10px;
-      border-radius: 10px;
-      width: 45%;
-    }
-    /* 上面綠色區塊 */
-    .header 
-    {
-      background: #9acd32;
-      height: 80px;
-      margin-bottom: 10px;
-    }
-    /* 中間藍色區塊 */
-    .content 
-    {
-      display: flex;
-      gap: 10px;
-    }
-    .content div 
-    {
-      background: #17a2a8;
-      height: 80px;
-      flex: 1;
-    }
-    /* 下面灰色區塊 */
-    .footer 
-    {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .footer div 
-    {
-      background: #ccc;
-      height: 50px;
-      flex: 1;
-    }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    @media (max-width: 480px) 
-    {
-      .container 
-      {
-        flex-direction: column;   /* 由橫變直 */
-      }
-      .card 
-      {
-        width: 100%;
-      }
-      .content 
-      {
-        flex-direction: column;   /* 中間變直排 */
-      }
-      .footer 
-      {
-        flex-direction: column;
-      }
-    }
-  </style>
+<title>Responsive Layout</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #2aa3d9;
+}
+
+/* 白色容器 */
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+/* 上方 */
+.header {
+  background: #9acd32;
+  height: 80px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+/* 中間（預設手機：直排） */
+.middle {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.box {
+  background: #1aa3a3;
+  height: 60px;
+  border-radius: 6px;
+}
+
+/* 下方 */
+.footer {
+  display: flex;
+  flex-direction: column; 
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.footer div {
+  background: #dddddd;
+  height: 60px;
+  border-radius: 6px;
+}
+
+@media screen and (min-width: 480px) {
+
+  .middle {
+    flex-direction: row;
+  }
+
+  .box {
+    flex: 1;
+  }
+
+  .footer {
+    flex-direction: row;
+  }
+
+  .footer div {
+    flex: 1;
+  }
+}
+</style>
+
 </head>
 
 <body>
-  <div class="container">
-    <div class="card">
-      <div class="header"></div>
-      <div class="content">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div class="footer">
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="header"></div>
-      <div class="content">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div class="footer">
-        <div></div>
-        <div></div>
-      </div>
-    </div>
+
+<div class="container">
+
+  <div class="header"></div>
+
+  <div class="middle">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
   </div>
+
+  <div class="footer">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+</div>
+
 </body>
 </html>
