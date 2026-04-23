@@ -30,15 +30,13 @@
       color: #707070;
     }
 
-    /* 包住按鈕的深色框 */
-    .btn-frame {
-      border: 1px solid #2f2f2f;
-      padding: 5px;
-      background-color: #ffffff;
-      display: inline-block;
+    /* 灰色區塊 */
+    .toolbar {
+      background-color: #d9d9d9;
+      padding: 8px;
     }
 
-    /* 按鈕固定樣式，不亂變 */
+    /* 只有一個按鈕 */
     .btn {
       height: 22px;
       padding: 0 18px;
@@ -51,9 +49,10 @@
       cursor: pointer;
     }
 
+    /* 皮膚色背景 */
     .preview-bg {
       width: 496px;
-      margin: 0 auto;
+      margin: 12px auto 0;
       background-color: #f3d9b8;
       padding: 14px;
       box-sizing: border-box;
@@ -68,7 +67,7 @@
       background-color: #ddd;
     }
 
-    /* 詳細資料直接接在頁面下面，預設隱藏 */
+    /* 預設不顯示 */
     .detail-section {
       display: none;
       width: 496px;
@@ -78,7 +77,7 @@
     .detail-row {
       background-color: #8ff38f;
       color: #2f2f2f;
-      padding: 6px 10px;
+      padding: 8px 10px;
       border-bottom: 1px solid #ffffff;
       box-sizing: border-box;
     }
@@ -92,9 +91,8 @@
   <div class="wrapper">
     <div class="top-area">
       <div class="title">預覽</div>
-
-      <div class="btn-frame">
-        <button class="btn" onclick="showDetail()">查看資訊</button>
+      <div class="toolbar">
+        <button class="btn" onclick="showDetail()">查看資料</button>
       </div>
     </div>
 
@@ -113,6 +111,10 @@
   <script>
     function showDetail() {
       document.getElementById("detailSection").style.display = "block";
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+      });
     }
   </script>
 </body>
