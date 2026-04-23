@@ -9,11 +9,13 @@
       font-family: Roboto, sans-serif;
       font-size: 13px;
       color: #2f2f2f;
+      margin: 0;
+      padding: 30px;
     }
 
     .wrapper {
       width: 520px;
-      margin: 30px auto;
+      margin: 0 auto;
     }
 
     .top-area {
@@ -28,21 +30,23 @@
       color: #707070;
     }
 
+    /* 包住按鈕的深色框 */
     .btn-frame {
       border: 1px solid #2f2f2f;
-      padding: 6px;
-      display: inline-block;
+      padding: 5px;
       background-color: #ffffff;
+      display: inline-block;
     }
 
+    /* 按鈕固定樣式，不亂變 */
     .btn {
       height: 22px;
       padding: 0 18px;
       background-color: #ffffff;
       border: 1px solid #2f2f2f;
       border-radius: 8px;
-      font-size: 13px;
       font-family: Roboto, sans-serif;
+      font-size: 13px;
       color: #2f2f2f;
       cursor: pointer;
     }
@@ -64,24 +68,19 @@
       background-color: #ddd;
     }
 
-    .detail-box {
-      width: 496px;
-      height: 101px;
-      margin: 20px auto 0;
-      border: 1px solid #cccccc;
-      overflow-y: scroll;
-      box-sizing: border-box;
+    /* 詳細資料直接接在頁面下面，預設隱藏 */
+    .detail-section {
       display: none;
-      background-color: #ffffff;
+      width: 496px;
+      margin: 20px auto 0;
     }
 
     .detail-row {
       background-color: #8ff38f;
       color: #2f2f2f;
       padding: 6px 10px;
-      line-height: 1.4;
       border-bottom: 1px solid #ffffff;
-      white-space: nowrap;
+      box-sizing: border-box;
     }
 
     .detail-row:last-child {
@@ -90,13 +89,12 @@
   </style>
 </head>
 <body>
-
   <div class="wrapper">
     <div class="top-area">
       <div class="title">預覽</div>
 
       <div class="btn-frame">
-        <button class="btn" onclick="showDetail()">收起資訊</button>
+        <button class="btn" onclick="showDetail()">查看資訊</button>
       </div>
     </div>
 
@@ -104,7 +102,7 @@
       <img class="preview-img" src="https://picsum.photos/450/240" alt="preview image">
     </div>
 
-    <div class="detail-box" id="detailBox">
+    <div class="detail-section" id="detailSection">
       <div class="detail-row">發佈日期：2017/10/12</div>
       <div class="detail-row">格式：JPG</div>
       <div class="detail-row">檔案大小：466.97KB</div>
@@ -114,14 +112,8 @@
 
   <script>
     function showDetail() {
-      var box = document.getElementById("detailBox");
-      if (box.style.display === "block") {
-        box.style.display = "none";
-      } else {
-        box.style.display = "block";
-      }
+      document.getElementById("detailSection").style.display = "block";
     }
   </script>
-
 </body>
 </html>
