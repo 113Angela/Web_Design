@@ -1,95 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Image Detail</title>
-  <style>
-    body {
-      font-family: Roboto, sans-serif;
-    }
+<meta charset="UTF-8">
+<style>
 
-    .wrapper {
-      width: 520px;
-      margin: 30px auto;
-    }
+body {
+  font-family: Roboto, sans-serif;
+}
 
-    .top-bar {
-      text-align: right;
-      margin-bottom: 10px;
-    }
+/* 🔶 外層橘色 */
+.outer {
+  width: 520px;
+  margin: 30px auto;
+  background-color: #f3d9b8;
+  padding: 20px;
+}
 
-    .detail-btn {
-      height: 22px;
-      padding: 0 18px;
-      background-color: #ffffff;
-      border: 1px solid #2f2f2f;
-      border-radius: 8px;
-      font-size: 13px;
-      font-family: Roboto, sans-serif;
-      color: #2f2f2f;
-      cursor: pointer;
-    }
+/* 🔳 上方灰色區（包按鈕） */
+.top-bar {
+  background-color: #eeeeee;
+  padding: 10px;
+  text-align: right;
+}
 
-    .image-box {
-      width: 450px;
-      height: 240px;
-      margin: 0 auto;
-      background-color: #f3d9b8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+/* 🔘 按鈕 */
+.btn {
+  height: 22px;
+  padding: 0 18px;
+  background-color: #ffffff;
+  border: 1px solid #2f2f2f;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #2f2f2f;
+  cursor: pointer;
+}
 
-    .image-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+/* 🖼 圖片 */
+.image-box {
+  width: 450px;
+  height: 240px;
+  margin: 20px auto;
+}
 
-    .detail-box {
-      width: 450px;
-      min-height: 101px;
-      margin: 20px auto 0;
-      border: 1px solid #cccccc;
-      overflow-y: auto;
-      display: none;
-    }
+.image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-    .detail-row {
-      padding: 6px 10px;
-      border-bottom: 1px solid #ffffff;
-      background-color: #8ff38f;
-      font-size: 13px;
-      color: #2f2f2f;
-    }
+/* 📄 下方資訊 */
+.detail-box {
+  width: 450px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  display: none;
+}
 
-    .detail-row:last-child {
-      border-bottom: none;
-    }
-  </style>
+.detail-row {
+  background-color: #8ff38f;
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+</style>
 </head>
+
 <body>
-  <div class="wrapper">
-    <div class="top-bar">
-      <button class="detail-btn" onclick="showDetail()">查看資料</button>
-    </div>
 
-    <div class="image-box">
-      <img src="img.jpg" alt="preview image">
-    </div>
+<div class="outer">
 
-    <div class="detail-box" id="detailBox">
-      <div class="detail-row">發佈日期：2017/10/12</div>
-      <div class="detail-row">格式：JPG</div>
-      <div class="detail-row">檔案大小：466.97KB</div>
-      <div class="detail-row">路徑：\\designcenter.qnap.com.tw\DesignCenterPM\...</div>
-    </div>
+  <div class="top-bar">
+    <button class="btn" onclick="showDetail()">查看資料</button>
   </div>
 
-  <script>
-    function showDetail() {
-      document.getElementById("detailBox").style.display = "block";
-    }
-  </script>
+  <div class="image-box">
+    <img src="https://picsum.photos/450/240">
+  </div>
+
+  <div class="detail-box" id="detailBox">
+    <div class="detail-row">發佈日期：2017/10/12</div>
+    <div class="detail-row">格式：JPG</div>
+    <div class="detail-row">檔案大小：466.97KB</div>
+    <div class="detail-row">路徑：sample/path</div>
+  </div>
+
+</div>
+
+<script>
+function showDetail() {
+  document.getElementById("detailBox").style.display = "block";
+}
+</script>
+
 </body>
 </html>
