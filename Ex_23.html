@@ -1,101 +1,156 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<title>Preview</title>
+  <meta charset="UTF-8">
+  <title>Preview Page</title>
+  <style>
+    body {
+      font-family: Roboto, sans-serif;
+      font-size: 13px;
+      color: #2f2f2f;
+      background: #ffffff;
+    }
 
-<style>
-body {
-  margin: 0;
-  font-family: Roboto, sans-serif;
-  font-size: 13px;
-  color: #2f2f2f;
-}
+    .wrapper {
+      width: 520px;
+      margin: 30px auto;
+    }
 
-/* 🔳 整個上方灰色區塊（重點） */
-.header {
-  background-color: #d9d9d9;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    /* 上方整條灰色區塊 */
+    .bar {
+      width: 496px;
+      height: 35px;
+      background: #f6f6f6;
+      border: 1px solid #eaeaea;
+      box-sizing: border-box;
+      margin: 0 auto;
+      padding: 5px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-/* 左上「預覽」 */
-.title {
-  color: #707070;
-}
+    .title {
+      color: #707070;
+      font-size: 13px;
+    }
 
-/* 按鈕（只有一顆） */
-.btn {
-  height: 22px;
-  padding: 0 18px;
-  background-color: #ffffff;
-  border: 1px solid #2f2f2f;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #2f2f2f;
-  cursor: pointer;
-}
+    /* 按鈕樣式照圖 */
+    .btn {
+      height: 22px;
+      padding: 0 18px;
+      background: #ffffff;
+      border: 1px solid #2f2f2f;
+      border-radius: 8px;
+      font-family: Roboto, sans-serif;
+      font-size: 13px;
+      color: #2f2f2f;
+      cursor: pointer;
+      line-height: 20px;
+    }
 
-/* 皮膚色區塊 */
-.preview-bg {
-  width: 520px;
-  margin: 20px auto;
-  background-color: #f3d9b8;
-  padding: 15px;
-  box-sizing: border-box;
-}
+    /* 皮膚色背景 */
+    .preview-bg {
+      width: 496px;
+      margin: 0 auto;
+      background: #f3d3af;
+      padding: 20px 23px;
+      box-sizing: border-box;
+    }
 
-/* 圖片 */
-.preview-img {
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
-}
+    .preview-img {
+      width: 450px;
+      height: 240px;
+      display: block;
+      object-fit: cover;
+    }
 
-/* 下方詳細資料（預設隱藏） */
-.detail {
-  display: none;
-  width: 520px;
-  margin: 0 auto 50px;
-}
+    /* 下方詳細資訊面板，預設隱藏 */
+    .detail-panel {
+      width: 496px;
+      height: 260px;
+      margin: 20px auto 0;
+      border: 1px solid #d9d9d9;
+      box-sizing: border-box;
+      display: none;
+      overflow-y: scroll; /* 右邊卷軸 */
+      background: #ffffff;
+    }
 
-/* 每一行綠底 */
-.row {
-  background-color: #8ff38f;
-  padding: 8px 10px;
-  border-bottom: 1px solid #ffffff;
-}
-</style>
+    .detail-bar {
+      width: 100%;
+      height: 35px;
+      background: #f6f6f6;
+      border-bottom: 1px solid #eaeaea;
+      box-sizing: border-box;
+      padding: 5px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+    }
+
+    .detail-preview-bg {
+      width: 100%;
+      background: #f3d3af;
+      padding: 10px 20px 6px 20px;
+      box-sizing: border-box;
+    }
+
+    .detail-img {
+      width: 100%;
+      height: 120px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .row {
+      background: #8ff38f;
+      color: #2f2f2f;
+      padding: 6px 10px;
+      border-bottom: 1px solid #ffffff;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- 🔥 灰色整條 -->
-<div class="header">
-  <div class="title">預覽</div>
-  <button class="btn" onclick="showDetail()">查看資料</button>
-</div>
+  <div class="wrapper">
+    <!-- 上方預覽 -->
+    <div class="bar">
+      <div class="title">預覽</div>
+      <button class="btn" onclick="showDetail()">查看資訊</button>
+    </div>
 
-<!-- 圖片區 -->
-<div class="preview-bg">
-  <img class="preview-img" src="https://picsum.photos/520/240">
-</div>
+    <div class="preview-bg">
+      <img class="preview-img" src="https://picsum.photos/450/240" alt="preview">
+    </div>
 
-<!-- 詳細資料（出現在整頁下方） -->
-<div class="detail" id="detail">
-  <div class="row">發佈日期：2017/10/12</div>
-  <div class="row">格式：JPG</div>
-  <div class="row">檔案大小：466.97KB</div>
-  <div class="row">路徑：sample/path</div>
-</div>
+    <!-- 按下後出現的下方詳細資料 -->
+    <div class="detail-panel" id="detailPanel">
+      <div class="detail-bar">
+        <div class="title">預覽</div>
+        <button class="btn">收起資訊</button>
+      </div>
 
-<script>
-function showDetail() {
-  document.getElementById("detail").style.display = "block";
-}
-</script>
+      <div class="detail-preview-bg">
+        <img class="detail-img" src="https://picsum.photos/450/240" alt="preview">
+      </div>
+
+      <div class="row">發佈日期：2017/10/12</div>
+      <div class="row">類別：JPG</div>
+      <div class="row">大小：466.97KB</div>
+      <div class="row">路徑：\\designcenter.qnap.com.tw\DesignCenterPM\RD\Image2PDF\v2\sample</div>
+    </div>
+  </div>
+
+  <script>
+    function showDetail() {
+      document.getElementById("detailPanel").style.display = "block";
+    }
+  </script>
 
 </body>
 </html>
