@@ -1,26 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <title>Image Detail</title>
   <style>
-    input[type=button] 
-    {
-      height: 22px;
-      padding: 0 18px; 
-      
-      box-sizing: border-box;
-      border: 1px solid black;
-      border-radius: 8px;
-      background-color: #ffffff;  
+    body {
+      font-family: Roboto, sans-serif;
+    }
 
+    .wrapper {
+      width: 520px;
+      margin: 30px auto;
+    }
+
+    .top-bar {
+      text-align: right;
+      margin-bottom: 10px;
+    }
+
+    .detail-btn {
+      height: 22px;
+      padding: 0 18px;
+      background-color: #ffffff;
+      border: 1px solid #2f2f2f;
+      border-radius: 8px;
       font-size: 13px;
       font-family: Roboto, sans-serif;
+      color: #2f2f2f;
+      cursor: pointer;
+    }
 
-      cursor:pointer;
+    .image-box {
+      width: 450px;
+      height: 240px;
+      margin: 0 auto;
+      background-color: #f3d9b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .detail-box {
+      width: 450px;
+      min-height: 101px;
+      margin: 20px auto 0;
+      border: 1px solid #cccccc;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .detail-row {
+      padding: 6px 10px;
+      border-bottom: 1px solid #ffffff;
+      background-color: #8ff38f;
+      font-size: 13px;
+      color: #2f2f2f;
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
     }
   </style>
 </head>
-
 <body>
-  <input type="button" value="查看資訊">
+  <div class="wrapper">
+    <div class="top-bar">
+      <button class="detail-btn" onclick="showDetail()">查看資料</button>
+    </div>
+
+    <div class="image-box">
+      <img src="img.jpg" alt="preview image">
+    </div>
+
+    <div class="detail-box" id="detailBox">
+      <div class="detail-row">發佈日期：2017/10/12</div>
+      <div class="detail-row">格式：JPG</div>
+      <div class="detail-row">檔案大小：466.97KB</div>
+      <div class="detail-row">路徑：\\designcenter.qnap.com.tw\DesignCenterPM\...</div>
+    </div>
+  </div>
+
+  <script>
+    function showDetail() {
+      document.getElementById("detailBox").style.display = "block";
+    }
+  </script>
 </body>
 </html>
