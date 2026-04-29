@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mouse Event Button</title>
+
+    <style>
+        #box {
+            width: 260px;
+            height: 220px;
+            border: 2px solid #999;
+            padding: 20px;
+        }
+
+        #text {
+            font-size: 40px;
+            color: black;
+            margin-bottom: 40px;
+        }
+
+        button {
+            font-size: 30px;
+            padding: 5px 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div id="text">Hello</div>
+        <button 
+            onmouseover="mouseOver()" 
+            onclick="mouseClick()">
+            Button
+        </button>
+    </div>
+
+    <script>
+        function mouseOver() {
+            document.getElementById("text").innerHTML = "Hello";
+            document.getElementById("text").style.color = "magenta";
+        }
+
+        function mouseClick() {
+            document.getElementById("text").innerHTML = "Mouse Click";
+            document.getElementById("text").style.color = "magenta";
+        }
+    </script>
+</body>
+</html>
