@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDG Question</title>
+
+    <style>
+        /* 整個頁面置中 + 深色背景 */
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #1F2423;
+            color: #D1CDC0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 外層卡片 */
+        .page {
+            width: 90%;
+            max-width: 900px;
+            background-color: #252B2A;
+            border: 1px solid rgba(197, 179, 150, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+        }
+
+        /* 題目區 */
+        .question {
+            font-size: 24px;
+            font-weight: bold;
+            color: #A3B18A;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        /* 每個選項整體 */
+        .option-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            margin-bottom: 18px;
+        }
+
+        /* A B C D 圓圈 */
+        .option-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: #363B3A;
+            color: #C5B396;
+            border: 1px solid rgba(197, 179, 150, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* 選項文字區 */
+        .option-text {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #D1D1D1;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 18px;
+        }
+
+        /* 被選到的選項（active 狀態） */
+        .option-card.active .option-circle {
+            background-color: #C5B396;
+            color: #1F2423;
+        }
+
+        .option-card.active .option-text {
+            border-color: #C5B396;
+            background-color: rgba(197, 179, 150, 0.1);
+            color: #F0E6D2;
+            font-weight: bold;
+        }
+
+        /* 按鈕區 */
+        .button-area {
+            text-align: right;
+            margin-top: 30px;
+        }
+
+        /* Submit 按鈕 */
+        #submitBtn {
+            background-color: #C5B396;
+            color: #1F2423;
+            border: none;
+            border-radius: 30px;
+            padding: 14px 42px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* 滑鼠移上去的效果 */
+        #submitBtn:hover {
+            background-color: #E9C46A;
+        }
+
+        /* 結果區 */
+        #resultBox {
+            margin-top: 30px;
+        }
+
+        /* 沒選答案提示 */
+        .warning-box {
+            color: #FF8A8A;
+            text-align: center;
+            font-weight: bold;
+            background-color: rgba(255, 138, 138, 0.1);
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 138, 138, 0.3);
+        }
+
+        /* 正確答案顯示（沒有閃爍效果） */
+        .correct-box {
+            padding: 24px;
+            border-radius: 14px;
+            background-color: rgba(163, 177, 138, 0.2);
+            color: #A3B18A;
+            border: 2px solid #A3B18A;
+        }
+
+        /* 錯誤答案顯示 */
+        .wrong-box {
+            padding: 24px;
+            border-radius: 14px;
+            background-color: rgba(214, 140, 122, 0.2);
+            color: #D68C7A;
+            border: 2px solid #D68C7A;
+        }
+
+        .result-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .result-text {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Learn More 按鈕 */
+        .learn-more-btn {
+            margin-top: 18px;
+            background-color: #C5B396;
+            color: #1F2423;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 18px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .learn-more-btn:hover {
+            background-color: #E9C46A;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- 題目 -->
+    <div class="question">
+        What would be the most appropriate and respectful action?
+    </div>
+
+    <!-- 四個選項 -->
+    <div class="option-card" data-option="A">
+        <div class="option-circle">A</div>
+        <div class="option-text">Tell the whole class about the situation and suggest raising money.</div>
+    </div>
+
+    <div class="option-card" data-option="B">
+        <div class="option-circle">B</div>
+        <div class="option-text">Decide not to interfere because it is their personal matter.</div>
+    </div>
+
+    <div class="option-card" data-option="C">
+        <div class="option-circle">C</div>
+        <div class="option-text">Quietly give them food every day without telling anyone.</div>
+    </div>
+
+    <div class="option-card" data-option="D">
+        <div class="option-circle">D</div>
+        <div class="option-text">Talk to them privately and help them find formal support.</div>
+    </div>
+
+    <!-- 提交按鈕 -->
+    <div class="button-area">
+        <button id="submitBtn">SUBMIT CHOICE</button>
+    </div>
+
+    <!-- 顯示結果 -->
+    <div id="resultBox"></div>
+
+</div>
+
+<script>
+    // 儲存目前選到的選項（A/B/C/D）
+    let selectedOption = null;
+
+    // 抓取所有選項與按鈕
+    const optionCards = document.querySelectorAll(".option-card");
+    const resultBox = document.getElementById("resultBox");
+    const submitBtn = document.getElementById("submitBtn");
+
+    // 點擊選項時
+    optionCards.forEach(function(card) {
+        card.addEventListener("click", function() {
+
+            // 先取消所有選項的選中狀態
+            optionCards.forEach(function(item) {
+                item.classList.remove("active");
+            });
+
+            // 只讓目前點擊的選項變成 active
+            card.classList.add("active");
+
+            // 記錄選到哪一個（A/B/C/D）
+            selectedOption = card.getAttribute("data-option");
+
+            // 清空之前的結果
+            resultBox.innerHTML = "";
+        });
+    });
+
+    // 按下 Submit 按鈕
+    submitBtn.addEventListener("click", function() {
+
+        // 如果沒選答案
+        if (selectedOption === null) {
+            resultBox.innerHTML = `
+                <div class="warning-box">
+                    Please select an option first.
+                </div>
+            `;
+            return;
+        }
+
+        // 如果選到正確答案 D
+        if (selectedOption === "D") {
+            resultBox.innerHTML = `
+                <div class="correct-box">
+                    <div class="result-title">Excellent choice!</div>
+                    <div class="result-text">
+                        Empathy with respect is the key to true sustainability. Seeking formal support ensures long-term stability.
+                    </div>
+
+                    <!-- 額外提供更多資訊的按鈕 -->
+                    <button class="learn-more-btn">Learn More</button>
+                </div>
+            `;
+        } 
+        // 選錯
+        else {
+            resultBox.innerHTML = `
+                <div class="wrong-box">
+                    <div class="result-title">Think again...</div>
+                    <div class="result-text">
+                        Consider the privacy and dignity of the individual. Protecting their feelings is as important as the help itself.
+                    </div>
+                </div>
+            `;
+        }
+
+    });
+</script>
+
+</body>
+</html>
