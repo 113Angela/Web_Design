@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>SDG Question</title>
+<style>
+    .option-card {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px 0;
+        cursor: pointer;
+    }
+    .active {
+        background-color: #ddd;
+    }
+</style>
+</head>
+
+<body>
+
+<h2>What would be the most appropriate and respectful action?</h2>
+
+<!-- 選項 -->
+<div class="option-card" data-option="A">
+    A. Tell the whole class about the situation and suggest raising money.
+</div>
+
+<div class="option-card" data-option="B">
+    B. Decide not to interfere because it is their personal matter.
+</div>
+
+<div class="option-card" data-option="C">
+    C. Quietly give them food every day without telling anyone.
+</div>
+
+<div class="option-card" data-option="D">
+    D. Talk to them privately and help them find formal support.
+</div>
+
+<!-- 按鈕 -->
+<button id="submitBtn">Submit</button>
+
+<!-- 結果 -->
+<div id="resultBox"></div>
+
+<script>
+let selectedOption = null;
+
+const optionCards = document.querySelectorAll(".option-card");
+const resultBox = document.getElementById("resultBox");
+const submitBtn = document.getElementById("submitBtn");
+
+// 點選選項
+optionCards.forEach(card => {
+    card.addEventListener("click", () => {
+        optionCards.forEach(c => c.classList.remove("active"));
+        card.classList.add("active");
+        selectedOption = card.dataset.option;
+        resultBox.innerHTML = "";
+    });
+});
+
+// 按下提交
+submitBtn.addEventListener("click", () => {
+    if (!selectedOption) {
+        resultBox.innerHTML = "Please select an option first.";
+        return;
+    }
+
+    if (selectedOption === "D") {
+        resultBox.innerHTML = "✅ Excellent choice!";
+    } else {
+        resultBox.innerHTML = "⚠️ Think again...";
+    }
+});
+</script>
+
+</body>
+</html>
