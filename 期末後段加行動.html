@@ -1,638 +1,309 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SDG Question</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDG Question</title>
 
-    <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background-color: #1F2423;
-            color: #D1CDC0;
-            font-family: Arial, sans-serif;
-        }
+<style>
+body {
+    margin: 0;
+    background-color: #1F2423;
+    color: #D1CDC0;
+    font-family: Arial, sans-serif;
+}
 
-        .hidden {
-            display: none;
-        }
+.hidden {
+    display: none;
+}
 
-        /* =========================
-           第一頁：題目與選項
-        ========================= */
+/* ===== 第一頁 ===== */
+.page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
 
-        .question-page {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            box-sizing: border-box;
-        }
+.container {
+    width: 95%;
+    max-width: 1200px;
+    display: flex;
+    gap: 40px;
+}
 
-        .container {
-            width: 95%;
-            max-width: 1200px;
-            display: flex;
-            gap: 40px;
-        }
+.story-box {
+    flex: 1;
+    background-color: #252B2A;
+    padding: 32px;
+    border-radius: 20px;
+}
 
-        .story-box {
-            flex: 1;
-            background-color: #252B2A;
-            padding: 32px;
-            border-radius: 20px;
-            border: 1px solid rgba(197, 179, 150, 0.2);
-        }
+.option-area {
+    flex: 1;
+}
 
-        .option-area {
-            flex: 1;
-        }
+.story-main {
+    font-size: 26px;
+    font-weight: bold;
+    color: white;
+}
 
-        .story-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
+.story-text,
+.story-sub {
+    margin-top: 15px;
+}
 
-        .avatar {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #525B59, #838B6D);
-            border: 2px solid #C5B396;
-        }
+.question {
+    margin-top: 20px;
+    font-size: 22px;
+    color: #A3B18A;
+}
 
-        .story-note {
-            background-color: rgba(163, 177, 138, 0.15);
-            border-left: 4px solid #A3B18A;
-            color: #A3B18A;
-            font-weight: bold;
-            padding: 10px 18px;
-            border-radius: 8px;
-        }
+.option-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
 
-        .story-main {
-            font-size: 26px;
-            font-weight: bold;
-            line-height: 1.5;
-            color: white;
-            margin-bottom: 20px;
-        }
+.option-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #363B3A;
+    color: #C5B396;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .story-text {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #D1D1D1;
-            margin-bottom: 20px;
-        }
+.option-text {
+    flex: 1;
+    padding: 15px;
+    background: rgba(255,255,255,0.05);
+}
 
-        .story-sub {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #B0B0B0;
-            font-style: italic;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 20px;
-            margin-bottom: 24px;
-        }
+.option-card.active .option-circle {
+    background: #C5B396;
+    color: #1F2423;
+}
 
-        .question {
-            font-size: 22px;
-            font-weight: bold;
-            color: #A3B18A;
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 18px;
-            border-radius: 12px;
-        }
+.button-area {
+    text-align: right;
+    margin-top: 20px;
+}
 
-        .option-card {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            cursor: pointer;
-            margin-bottom: 18px;
-        }
+#submitBtn {
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: none;
+    background: #C5B396;
+    cursor: pointer;
+}
 
-        .option-circle {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background-color: #363B3A;
-            color: #C5B396;
-            border: 1px solid rgba(197, 179, 150, 0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            font-weight: bold;
-        }
+.correct-box {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(163,177,138,0.2);
+}
 
-        .option-text {
-            flex: 1;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #D1D1D1;
-            padding: 20px;
-            border-radius: 12px;
-            font-size: 18px;
-        }
+.learn-more-btn {
+    margin-top: 10px;
+}
 
-        .option-card.active .option-circle {
-            background-color: #C5B396;
-            color: #1F2423;
-        }
+/* ===== 覆蓋頁（關鍵） ===== */
+.learn-page,
+.action-page {
+    position: fixed;   /* 🔥關鍵 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
-        .option-card.active .option-text {
-            border-color: #C5B396;
-            background-color: rgba(197, 179, 150, 0.1);
-            color: #F0E6D2;
-            font-weight: bold;
-        }
+    background-color: #111514;
+    color: white;
+    padding: 50px;
 
-        .button-area {
-            text-align: right;
-            margin-top: 30px;
-        }
+    z-index: 999;
+    overflow-y: auto;
+}
 
-        #submitBtn {
-            background-color: #C5B396;
-            color: #1F2423;
-            border: none;
-            border-radius: 30px;
-            padding: 14px 42px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+/* Learn More */
+.learn-title {
+    font-size: 40px;
+    color: #A3B18A;
+}
 
-        #submitBtn:hover {
-            background-color: #E9C46A;
-        }
+.target-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
 
-        #resultBox {
-            margin-top: 30px;
-        }
+.target-card {
+    background: #1F2423;
+    padding: 20px;
+}
 
-        .warning-box {
-            color: #FF8A8A;
-            text-align: center;
-            font-weight: bold;
-            background-color: rgba(255, 138, 138, 0.1);
-            padding: 14px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 138, 138, 0.3);
-        }
+/* Take Action */
+.action-title {
+    font-size: 40px;
+}
 
-        .correct-box {
-            padding: 24px;
-            border-radius: 14px;
-            background-color: rgba(163, 177, 138, 0.2);
-            color: #A3B18A;
-            border: 2px solid #A3B18A;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-        }
+.action-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
 
-        .wrong-box {
-            padding: 24px;
-            border-radius: 14px;
-            background-color: rgba(214, 140, 122, 0.2);
-            color: #D68C7A;
-            border: 2px solid #D68C7A;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-        }
+.action-card {
+    border: 2px dashed white;
+    padding: 20px;
+    text-align: center;
+}
 
-        .result-title {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
+/* 右下角按鈕 */
+.learn-buttons,
+.action-buttons {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+}
 
-        .result-text {
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.6;
-        }
-
-        .learn-more-btn {
-            margin-top: 18px;
-            background-color: #C5B396;
-            color: #1F2423;
-            border: none;
-            border-radius: 10px;
-            padding: 10px 18px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .learn-more-btn:hover {
-            background-color: #E9C46A;
-        }
-
-        /* =========================
-           第二頁：Learn More
-        ========================= */
-
-        .learn-page {
-            min-height: 100vh;
-            background-color: #111514;
-            color: white;
-            padding: 50px;
-            box-sizing: border-box;
-            position: relative;
-        }
-
-        .learn-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-bottom: 100px;
-        }
-
-        .learn-title {
-            font-size: 46px;
-            color: #A3B18A;
-            margin-bottom: 26px;
-        }
-
-        .learn-intro {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(197, 179, 150, 0.25);
-            border-radius: 20px;
-            padding: 28px;
-            font-size: 24px;
-            line-height: 1.7;
-            margin-bottom: 36px;
-            color: white;
-        }
-
-        .target-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-        }
-
-        .target-card {
-            background-color: #1F2423;
-            border: 1px solid rgba(197, 179, 150, 0.25);
-            border-radius: 20px;
-            padding: 28px;
-        }
-
-        .target-number {
-            font-size: 34px;
-            font-weight: bold;
-            color: #C5B396;
-            margin-bottom: 14px;
-        }
-
-        .target-card p {
-            margin: 0;
-            font-size: 19px;
-            line-height: 1.6;
-            color: white;
-        }
-
-        .learn-buttons,
-        .action-buttons {
-            position: fixed;
-            right: 40px;
-            bottom: 32px;
-            display: flex;
-            gap: 14px;
-        }
-
-        .action-btn,
-        .home-btn {
-            border: none;
-            border-radius: 30px;
-            padding: 14px 28px;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .action-btn {
-            background-color: #E9C46A;
-            color: #1F2423;
-        }
-
-        .home-btn {
-            background-color: #C5B396;
-            color: #1F2423;
-        }
-
-        .action-btn:hover,
-        .home-btn:hover {
-            opacity: 0.85;
-        }
-
-        /* =========================
-           第三頁：Take Action
-        ========================= */
-
-        .action-page {
-            min-height: 100vh;
-            background-color: #111514;
-            color: white;
-            padding: 50px;
-            box-sizing: border-box;
-            position: relative;
-        }
-
-        .action-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-bottom: 100px;
-        }
-
-        .action-title {
-            font-size: 46px;
-            color: #A3B18A;
-            margin-bottom: 40px;
-        }
-
-        .action-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-        }
-
-        .action-card {
-            background-color: #1F2423;
-            border: 1px dashed rgba(197, 179, 150, 0.65);
-            border-radius: 18px;
-            padding: 28px;
-            font-size: 22px;
-            line-height: 1.5;
-            color: white;
-            text-align: center;
-        }
-    </style>
+button {
+    cursor: pointer;
+}
+</style>
 </head>
 
 <body>
 
-    <!-- 第一頁：題目與選項 -->
-    <div id="questionPage" class="question-page">
-        <div class="container">
+<!-- 第一頁 -->
+<div id="questionPage" class="page">
+<div class="container">
 
-            <div class="story-box">
-                <div class="story-header">
-                    <div class="avatar"></div>
+<div class="story-box">
+<div class="story-main">
+You notice that one of your classmates has recently stopped bringing lunch to school.
+</div>
 
-                    <div class="story-note">
-                        A quiet change is noticed during lunch time.
-                    </div>
-                </div>
+<div class="story-text">
+You start to realize this may not be a temporary situation.
+</div>
 
-                <div class="story-main">
-                    You notice that one of your classmates has recently stopped bringing lunch to school.
-                </div>
+<div class="story-sub">
+Over time, you realize that this is not a temporary situation — it may be due to financial difficulties at home.
+</div>
 
-                <div class="story-text">
-                    You start to realize this may not be a temporary situation.
-                </div>
+<div class="question">
+What would be the most appropriate and respectful action?
+</div>
+</div>
 
-                <div class="story-sub">
-                    Over time, you realize that this is not a temporary situation — it may be due to financial difficulties at home.
-                </div>
+<div class="option-area">
 
-                <div class="question">
-                    What would be the most appropriate and respectful action?
-                </div>
-            </div>
+<div class="option-card" data-option="A"><div class="option-circle">A</div><div class="option-text">Tell the whole class about the situation and suggest raising money.</div></div>
+<div class="option-card" data-option="B"><div class="option-circle">B</div><div class="option-text">Decide not to interfere because it is their personal matter.</div></div>
+<div class="option-card" data-option="C"><div class="option-circle">C</div><div class="option-text">Quietly give them food every day without telling anyone.</div></div>
+<div class="option-card" data-option="D"><div class="option-circle">D</div><div class="option-text">Talk to them privately and help them find formal support.</div></div>
 
-            <div class="option-area">
+<div class="button-area">
+<button id="submitBtn">SUBMIT</button>
+</div>
 
-                <div class="option-card" data-option="A">
-                    <div class="option-circle">A</div>
-                    <div class="option-text">
-                        Tell the whole class about the situation and suggest raising money.
-                    </div>
-                </div>
+<div id="resultBox"></div>
 
-                <div class="option-card" data-option="B">
-                    <div class="option-circle">B</div>
-                    <div class="option-text">
-                        Decide not to interfere because it is their personal matter.
-                    </div>
-                </div>
+</div>
+</div>
+</div>
 
-                <div class="option-card" data-option="C">
-                    <div class="option-circle">C</div>
-                    <div class="option-text">
-                        Quietly give them food every day without telling anyone.
-                    </div>
-                </div>
+<!-- Learn More -->
+<div id="learnPage" class="learn-page hidden">
+<h1 class="learn-title">No Poverty</h1>
 
-                <div class="option-card" data-option="D">
-                    <div class="option-circle">D</div>
-                    <div class="option-text">
-                        Talk to them privately and help them find formal support.
-                    </div>
-                </div>
+<p>
+Eradicating poverty is not merely an act of charity, but a matter of justice, as everyone deserves the opportunity to live a basic and dignified life. However, nearly half of the world's population still lives in poverty, and every day people die due to a lack of food and clean water.
+</p>
 
-                <div class="button-area">
-                    <button id="submitBtn">SUBMIT CHOICE</button>
-                </div>
+<div class="target-grid">
+<div class="target-card">1.1 By 2030, eradicate extreme poverty everywhere...</div>
+<div class="target-card">1.2 Reduce by at least half the proportion...</div>
+<div class="target-card">1.3 Implement appropriate social protection...</div>
+<div class="target-card">1.4 Ensure that all people...</div>
+<div class="target-card">1.5 Build the resilience...</div>
+<div class="target-card">1.A Mobilize significant resources...</div>
+<div class="target-card">1.B Create sound policy frameworks...</div>
+</div>
 
-                <div id="resultBox"></div>
-            </div>
+<div class="learn-buttons">
+<button id="actionBtn">TAKE ACTION</button>
+<button>HOME</button>
+</div>
+</div>
 
-        </div>
-    </div>
+<!-- Take Action -->
+<div id="actionPage" class="action-page hidden">
+<h1 class="action-title">What Can We Do</h1>
 
+<div class="action-grid">
+<div class="action-card">Donate unused clothes and items to people in need.</div>
+<div class="action-card">Choose products that support fair practices.</div>
+<div class="action-card">Avoid wasting food in daily meals.</div>
+<div class="action-card">Offer help to people in need when you encounter them.</div>
+<div class="action-card">Contribute small, regular donations if possible.</div>
+<div class="action-card">Learn about poverty issues and share them with others.</div>
+</div>
 
-    <!-- 第二頁：Learn More -->
-    <div id="learnPage" class="learn-page hidden">
-        <div class="learn-content">
+<div class="action-buttons">
+<button>HOME</button>
+</div>
+</div>
 
-            <h1 class="learn-title">No Poverty</h1>
+<script>
+let selectedOption = null;
 
-            <div class="learn-intro">
-                Eradicating poverty is not merely an act of charity, but a matter of justice, as everyone deserves the opportunity to live a basic and dignified life. However, nearly half of the world's population still lives in poverty, and every day people die due to a lack of food and clean water.
-            </div>
+const questionPage = document.getElementById("questionPage");
+const learnPage = document.getElementById("learnPage");
+const actionPage = document.getElementById("actionPage");
 
-            <div class="target-grid">
+const optionCards = document.querySelectorAll(".option-card");
+const resultBox = document.getElementById("resultBox");
 
-                <div class="target-card">
-                    <div class="target-number">1.1</div>
-                    <p>
-                        By 2030, eradicate extreme poverty everywhere, ensuring that no one lives on less than $1.25 per day.
-                    </p>
-                </div>
+optionCards.forEach(card=>{
+card.onclick=()=>{
+optionCards.forEach(c=>c.classList.remove("active"));
+card.classList.add("active");
+selectedOption = card.dataset.option;
+};
+});
 
-                <div class="target-card">
-                    <div class="target-number">1.2</div>
-                    <p>
-                        Reduce by at least half the proportion of men, women, and children of all ages living in poverty, according to national definitions.
-                    </p>
-                </div>
+submitBtn.onclick=()=>{
+if(selectedOption==="D"){
+resultBox.innerHTML=`
+<div class="correct-box">
+Excellent choice!
+<br>
+Empathy with respect is the key to true sustainability. Seeking formal support ensures long-term stability.
+<br>
+<button id="learnBtn">Learn More</button>
+</div>
+`;
 
-                <div class="target-card">
-                    <div class="target-number">1.3</div>
-                    <p>
-                        Implement appropriate social protection systems and measures for all, and by 2030 achieve substantial coverage of the poor and the vulnerable.
-                    </p>
-                </div>
+document.getElementById("learnBtn").onclick=()=>{
+questionPage.classList.add("hidden");
+learnPage.classList.remove("hidden");
+};
+}
+};
 
-                <div class="target-card">
-                    <div class="target-number">1.4</div>
-                    <p>
-                        Ensure that all people, especially the poor and vulnerable, have equal rights to economic resources, access to basic services, and ownership and control over land and other forms of property, inheritance, natural resources, new technology, and financial services, including microfinance.
-                    </p>
-                </div>
-
-                <div class="target-card">
-                    <div class="target-number">1.5</div>
-                    <p>
-                        Build the resilience of the poor and those in vulnerable situations, reducing their exposure and vulnerability to climate-related extreme events and other economic, social, and environmental shocks and disasters.
-                    </p>
-                </div>
-
-                <div class="target-card">
-                    <div class="target-number">1.A</div>
-                    <p>
-                        Mobilize significant resources from a variety of sources, including enhanced development cooperation, in order to provide adequate and predictable means for developing countries, particularly the least developed countries, to implement programs and policies to end poverty.
-                    </p>
-                </div>
-
-                <div class="target-card">
-                    <div class="target-number">1.B</div>
-                    <p>
-                        Create sound policy frameworks at the national, regional, and international levels, based on pro-poor and gender-sensitive development strategies, to support accelerated investment in poverty eradication actions.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="learn-buttons">
-            <button id="actionBtn" class="action-btn">TAKE ACTION</button>
-            <button id="learnHomeBtn" class="home-btn">HOME</button>
-        </div>
-    </div>
-
-
-    <!-- 第三頁：Take Action -->
-    <div id="actionPage" class="action-page hidden">
-        <div class="action-content">
-
-            <h1 class="action-title">What Can We Do</h1>
-
-            <div class="action-grid">
-
-                <div class="action-card">
-                    Donate unused clothes and items to people in need.
-                </div>
-
-                <div class="action-card">
-                    Choose products that support fair practices.
-                </div>
-
-                <div class="action-card">
-                    Avoid wasting food in daily meals.
-                </div>
-
-                <div class="action-card">
-                    Offer help to people in need when you encounter them.
-                </div>
-
-                <div class="action-card">
-                    Contribute small, regular donations if possible.
-                </div>
-
-                <div class="action-card">
-                    Learn about poverty issues and share them with others.
-                </div>
-
-            </div>
-        </div>
-
-        <div class="action-buttons">
-            <button id="actionHomeBtn" class="home-btn">HOME</button>
-        </div>
-    </div>
-
-
-    <script>
-        let selectedOption = null;
-
-        const questionPage = document.getElementById("questionPage");
-        const learnPage = document.getElementById("learnPage");
-        const actionPage = document.getElementById("actionPage");
-
-        const optionCards = document.querySelectorAll(".option-card");
-        const resultBox = document.getElementById("resultBox");
-        const submitBtn = document.getElementById("submitBtn");
-
-        const actionBtn = document.getElementById("actionBtn");
-
-        optionCards.forEach(function(card) {
-            card.addEventListener("click", function() {
-                optionCards.forEach(function(item) {
-                    item.classList.remove("active");
-                });
-
-                card.classList.add("active");
-                selectedOption = card.getAttribute("data-option");
-                resultBox.innerHTML = "";
-            });
-        });
-
-        submitBtn.addEventListener("click", function() {
-            if (selectedOption === null) {
-                resultBox.innerHTML = `
-                    <div class="warning-box">
-                        Please select an option first.
-                    </div>
-                `;
-                return;
-            }
-
-            if (selectedOption === "D") {
-                resultBox.innerHTML = `
-                    <div class="correct-box">
-                        <div class="result-title">✅ Excellent choice!</div>
-
-                        <div class="result-text">
-                            Empathy with respect is the key to true sustainability. Seeking formal support ensures long-term stability.
-                        </div>
-
-                        <button id="learnMoreBtn" class="learn-more-btn">Learn More</button>
-                    </div>
-                `;
-
-                document.getElementById("learnMoreBtn").addEventListener("click", function() {
-                    questionPage.classList.add("hidden");
-                    learnPage.classList.remove("hidden");
-                    actionPage.classList.add("hidden");
-                    window.scrollTo(0, 0);
-                });
-            } else {
-                resultBox.innerHTML = `
-                    <div class="wrong-box">
-                        <div class="result-title">⚠️ Think again...</div>
-
-                        <div class="result-text">
-                            Consider the privacy and dignity of the individual. Protecting their feelings is as important as the help itself.
-                        </div>
-                    </div>
-                `;
-            }
-        });
-
-        actionBtn.addEventListener("click", function() {
-            questionPage.classList.add("hidden");
-            learnPage.classList.add("hidden");
-            actionPage.classList.remove("hidden");
-            window.scrollTo(0, 0);
-        });
-
-        /* HOME 按鈕目前暫時不放功能 */
-    </script>
+actionBtn.onclick=()=>{
+learnPage.classList.add("hidden");
+actionPage.classList.remove("hidden");
+};
+</script>
 
 </body>
 </html>
