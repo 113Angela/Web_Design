@@ -3,9 +3,6 @@
 <head>
     <!--
         基礎文件設定
-        - charset：確保中文與特殊符號能正確顯示
-        - viewport：讓頁面能在手機、平板與桌機上正確縮放
-        - title：瀏覽器分頁標題
     -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +10,6 @@
 
     <!--
         外部資源載入
-        - Tailwind CSS：快速建立響應式版面與常用樣式
-        - Google Fonts：提供標題與內文字型，營造典雅視覺風格
     -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
@@ -25,7 +20,6 @@
            Global Styles
            ----------------------------------------------------------------------
            定義全站基礎視覺：字型、背景色、文字色與過場效果。
-           本頁採用深色莫蘭迪色系，讓 SDGs 圖示與互動區塊更突出。
         ====================================================================== */
 
         body {
@@ -64,7 +58,6 @@
            SDG Card Grid
            ----------------------------------------------------------------------
            SDGs 卡片區塊樣式：維持正方形比例、加入 hover 動態，
-           提升使用者對可點擊元素的辨識度。
         ====================================================================== */
 
         .sdg-card {
@@ -162,7 +155,6 @@
            Modal & Buttons
            ----------------------------------------------------------------------
            彈出視窗、按鈕與關閉按鈕樣式。
-           Modal 用於呈現 SDG 1 的情境式互動題目。
         ====================================================================== */
 
         .modal-bg {
@@ -195,160 +187,232 @@
 
 
         /* ======================================================================
-           Learn More & Take Action Full Page
+           Option Hover Animation
            ----------------------------------------------------------------------
-           以覆蓋式頁面呈現 SDG 1 的延伸內容與行動建議。
-           HOME 按鈕會回到 17 個 SDGs 選項首頁。
+           保留選項滑鼠移上去時的互動效果。
         ====================================================================== */
 
-        .extra-page {
+        .option-card {
+            transition: all 0.25s ease;
+        }
+
+        .option-card:hover .option-circle {
+            background: rgba(197, 179, 150, 0.2);
+            transform: scale(1.08);
+        }
+
+        .option-card:hover .option-text {
+            border-color: rgba(197, 179, 150, 0.5);
+            background: rgba(197, 179, 150, 0.08);
+            transform: translateX(4px);
+        }
+
+        /* ======================================================================
+           Learn More / Take Action Full Pages
+           ----------------------------------------------------------------------
+           這兩頁用 fixed 覆蓋原本畫面；按鈕放在內容最後，必須滑到底才會看到。
+        ====================================================================== */
+
+        .full-page {
             position: fixed;
             inset: 0;
-            z-index: 60;
+            z-index: 80;
             background-color: #111514;
             color: #FFFFFF;
             overflow-y: auto;
-            padding: 48px 32px 120px;
+            padding: 52px 64px;
             box-sizing: border-box;
         }
 
-        .extra-content {
-            max-width: 1100px;
+        .full-page-content {
+            max-width: 1280px;
             margin: 0 auto;
         }
 
-        .extra-title {
+        .full-page-header,
+        .action-title-area {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            margin-bottom: 42px;
+        }
+
+        .page-sdg-icon {
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
+            filter: brightness(0.95) saturate(0.95);
+            border-radius: 10px;
+        }
+
+        .overlay-title {
             font-family: 'Libre Baskerville', serif;
-            font-size: 3rem;
+            font-size: 58px;
+            font-weight: 700;
             color: #A3B18A;
-            margin-bottom: 28px;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.03em;
         }
 
-        .extra-intro {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(197, 179, 150, 0.25);
-            border-radius: 20px;
-            padding: 28px;
-            font-size: 1.45rem;
-            line-height: 1.7;
-            color: #F2F2F2;
-            margin-bottom: 36px;
+        .learn-intro {
+            font-size: 27px;
+            line-height: 1.8;
+            color: #F1F1F1;
+            margin-bottom: 44px;
+            max-width: 1180px;
         }
 
-        .target-grid,
-        .action-grid {
+        .target-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 24px;
-        }
-
-        .target-card,
-        .action-card {
-            background-color: #1F2423;
-            border-radius: 18px;
-            padding: 26px;
-            color: #FFFFFF;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 26px;
         }
 
         .target-card {
+            background-color: #1F2423;
             border: 1px solid rgba(197, 179, 150, 0.25);
+            border-radius: 22px;
+            padding: 30px 34px;
+            transition: all 0.3s ease;
+        }
+
+        .target-card:hover {
+            border-color: rgba(197, 179, 150, 0.55);
+            background-color: rgba(197, 179, 150, 0.06);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
         }
 
         .target-number {
-            font-size: 2rem;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 34px;
             font-weight: 700;
             color: #C5B396;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .target-card p {
             margin: 0;
-            font-size: 1.15rem;
+            font-size: 21px;
             line-height: 1.65;
+            color: #FFFFFF;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px 36px;
         }
 
         .action-card {
-            border: 1px dashed rgba(197, 179, 150, 0.65);
-            min-height: 120px;
+            background-color: #1F2423;
+            border: 2px dashed rgba(197, 179, 150, 0.7);
+            border-radius: 22px;
+            padding: 28px 34px;
+            min-height: 96px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            font-size: 1.35rem;
-            line-height: 1.5;
-        }
-
-        .page-buttons {
-            position: fixed;
-            right: 40px;
-            bottom: 32px;
-            display: flex;
-            gap: 14px;
-            z-index: 70;
-        }
-
-        .page-btn {
-            border: none;
-            border-radius: 999px;
-            padding: 14px 28px;
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            cursor: pointer;
+            color: #FFFFFF;
+            font-size: 25px;
+            line-height: 1.35;
             transition: all 0.3s ease;
         }
 
-        .page-btn.action {
-            background-color: #E9C46A;
-            color: #1F2423;
+        .action-card:hover {
+            background-color: rgba(197, 179, 150, 0.08);
+            border-color: #E9C46A;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
         }
 
-        .page-btn.home {
-            background-color: #C5B396;
-            color: #1F2423;
+        .overlay-button-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            margin-top: 56px;
+            padding-bottom: 20px;
         }
 
-        .page-btn:hover {
-            opacity: 0.88;
-            transform: translateY(-2px);
+        .overlay-right-buttons {
+            display: flex;
+            gap: 14px;
+        }
+
+        .overlay-btn,
+        .learn-more-btn {
+            border: none;
+            border-radius: 999px;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: 800;
+            cursor: pointer;
+            letter-spacing: 0.06em;
+            transition: all 0.3s ease;
         }
 
         .learn-more-btn {
             margin-top: 18px;
             background-color: #C5B396;
             color: #1F2423;
-            border: none;
-            border-radius: 10px;
-            padding: 10px 18px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            padding: 12px 28px;
+            font-size: 17px;
         }
 
-        .learn-more-btn:hover {
+        .home-btn {
+            background-color: #C5B396;
+            color: #1F2423;
+        }
+
+        .back-btn {
+            background-color: #363B3A;
+            color: #C5B396;
+            border: 1px solid rgba(197, 179, 150, 0.45);
+        }
+
+        .action-btn {
             background-color: #E9C46A;
-            transform: translateY(-2px);
+            color: #1F2423;
         }
 
-        @media (max-width: 768px) {
+        .overlay-btn:hover,
+        .learn-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+            opacity: 0.92;
+        }
+
+        @media (max-width: 900px) {
+            .full-page {
+                padding: 36px 24px;
+            }
+
             .target-grid,
             .action-grid {
                 grid-template-columns: 1fr;
             }
 
-            .extra-title {
-                font-size: 2.2rem;
+            .overlay-title {
+                font-size: 40px;
             }
 
-            .extra-intro {
-                font-size: 1.15rem;
+            .learn-intro {
+                font-size: 22px;
             }
 
-            .page-buttons {
-                right: 20px;
-                bottom: 20px;
+            .page-sdg-icon {
+                width: 86px;
+                height: 86px;
+            }
+
+            .overlay-button-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .overlay-right-buttons {
+                flex-direction: column;
             }
         }
     </style>
@@ -392,108 +456,105 @@
 
         <!--
             SDGs 卡片網格
-            - 使用 Tailwind 的 grid 系統建立響應式欄位
-            - 每張卡片透過 data-title 儲存對應 SDG 名稱
-            - 目前 JavaScript 僅針對 SDG 1 開啟互動 Modal
         -->
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-0 border-t border-l border-white/10">
-            <div class="sdg-card border-r border-b" data-title="SDG 1: No Poverty">
+            <div class="sdg-card border-r border-b" data-title="SDG 1: No Poverty" data-goal="1">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-1.png" alt="Goal 1">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 2: Zero Hunger">
+            <div class="sdg-card border-r border-b" data-title="SDG 2: Zero Hunger" data-goal="2">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-2.png" alt="Goal 2">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 3: Good Health">
+            <div class="sdg-card border-r border-b" data-title="SDG 3: Good Health" data-goal="3">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-3.png" alt="Goal 3">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 4: Quality Education">
+            <div class="sdg-card border-r border-b" data-title="SDG 4: Quality Education" data-goal="4">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-4.png" alt="Goal 4">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 5: Gender Equality">
+            <div class="sdg-card border-r border-b" data-title="SDG 5: Gender Equality" data-goal="5">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-5.png" alt="Goal 5">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 6: Clean Water">
+            <div class="sdg-card border-r border-b" data-title="SDG 6: Clean Water" data-goal="6">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-6.png" alt="Goal 6">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 7: Clean Energy">
+            <div class="sdg-card border-r border-b" data-title="SDG 7: Clean Energy" data-goal="7">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-7.png" alt="Goal 7">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 8: Decent Work">
+            <div class="sdg-card border-r border-b" data-title="SDG 8: Decent Work" data-goal="8">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-8.png" alt="Goal 8">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 9: Innovation">
+            <div class="sdg-card border-r border-b" data-title="SDG 9: Innovation" data-goal="9">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-9.png" alt="Goal 9">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 10: Reduced Inequality">
+            <div class="sdg-card border-r border-b" data-title="SDG 10: Reduced Inequality" data-goal="10">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-10.png" alt="Goal 10">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 11: Sustainable Cities">
+            <div class="sdg-card border-r border-b" data-title="SDG 11: Sustainable Cities" data-goal="11">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-11.png" alt="Goal 11">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 12: Responsible Consumption">
+            <div class="sdg-card border-r border-b" data-title="SDG 12: Responsible Consumption" data-goal="12">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-12.png" alt="Goal 12">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 13: Climate Action">
+            <div class="sdg-card border-r border-b" data-title="SDG 13: Climate Action" data-goal="13">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-13.png" alt="Goal 13">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 14: Life Below Water">
+            <div class="sdg-card border-r border-b" data-title="SDG 14: Life Below Water" data-goal="14">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-14.png" alt="Goal 14">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 15: Life on Land">
+            <div class="sdg-card border-r border-b" data-title="SDG 15: Life on Land" data-goal="15">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-15.png" alt="Goal 15">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 16: Peace and Justice">
+            <div class="sdg-card border-r border-b" data-title="SDG 16: Peace and Justice" data-goal="16">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-16.png" alt="Goal 16">
                 </div>
             </div>
 
-            <div class="sdg-card border-r border-b" data-title="SDG 17: Partnerships">
+            <div class="sdg-card border-r border-b" data-title="SDG 17: Partnerships" data-goal="17">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-17.png" alt="Goal 17">
                 </div>
@@ -502,12 +563,11 @@
     </main>
 
     <!-- ======================================================================
-         Modal：SDG 1 情境互動視窗
+         Modal：情境互動視窗
          ----------------------------------------------------------------------
-         使用者點擊 SDG 1 卡片後顯示。
          內容包含情境敘事、四個選項與送出後的即時回饋。
     ====================================================================== -->
-    <div id="modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center p-4 z-50">
+    <div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
         <div class="modal-bg rounded-3xl max-w-5xl w-full shadow-2xl overflow-y-auto max-h-[95vh] p-8 md:p-12 relative">
 
             <!-- Modal 關閉按鈕 -->
@@ -520,19 +580,19 @@
                 <img
                     id="modalImg"
                     src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-1.png"
-                    class="w-24 logo-filter"
+                    class="w-24"
                     alt="SDG Icon"
                 >
                 <div>
                     <h2 id="modalTitle" class="text-5xl font-bold modal-title-font">No Poverty</h2>
-                    <p class="subtitle-accent tracking-widest text-sm mt-1 uppercase font-bold">
-                        GOAL 01 / 17 Sustainable Development Goals
-                    </p>
+                <p id="modalGoalLabel" class="subtitle-accent tracking-widest text-sm mt-1 uppercase font-bold">
+                    GOAL 01 / 17 Sustainable Development Goals
+                </p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- 情境故事內容：引導使用者理解 SDG 1 與生活情境的連結 -->
+                <!-- 情境故事內容：引導使用者理解與生活情境的連結 -->
                 <div class="story-box shadow-inner">
                     <div class="flex items-center gap-4 mb-6">
                         <div class="avatar shadow-lg"></div>
@@ -551,7 +611,7 @@
                         <p id="storySub" class="text-lg text-[#B0B0B0] leading-relaxed italic border-t border-white/5 pt-4">
                             Over time, you realize that this is not a temporary situation — it may be due to financial difficulties at home.
                         </p>
-                        <p class="text-xl font-semibold subtitle-accent bg-white/5 p-4 rounded-lg">
+                        <p id="questionText" class="text-xl font-semibold subtitle-accent bg-white/5 p-4 rounded-lg">
                             What would be the most appropriate and respectful action?
                         </p>
                     </div>
@@ -561,28 +621,25 @@
                 <div class="space-y-5">
                     <div class="option-card flex items-center gap-4 cursor-pointer group" data-option="A">
                         <div class="option-circle h-14 w-14 min-w-[56px] rounded-full flex items-center justify-center font-bold text-xl">A</div>
-                        <div class="option-text flex-grow p-5 rounded-xl text-lg">
-                            Tell the whole class about the situation and suggest raising money.
+                        <div id="optionTextA" class="option-text flex-grow p-5 rounded-xl text-lg">                            Tell the whole class about the situation and suggest raising money.
                         </div>
                     </div>
 
                     <div class="option-card flex items-center gap-4 cursor-pointer group" data-option="B">
                         <div class="option-circle h-14 w-14 min-w-[56px] rounded-full flex items-center justify-center font-bold text-xl">B</div>
-                        <div class="option-text flex-grow p-5 rounded-xl text-lg">
-                            Decide not to interfere because it is their personal matter.
+                        <div id="optionTextB" class="option-text flex-grow p-5 rounded-xl text-lg">                            Decide not to interfere because it is their personal matter.
                         </div>
                     </div>
 
                     <div class="option-card flex items-center gap-4 cursor-pointer group" data-option="C">
                         <div class="option-circle h-14 w-14 min-w-[56px] rounded-full flex items-center justify-center font-bold text-xl">C</div>
-                        <div class="option-text flex-grow p-5 rounded-xl text-lg">
-                            Quietly give them food every day without telling anyone.
+                        <div id="optionTextC" class="option-text flex-grow p-5 rounded-xl text-lg">                            Quietly give them food every day without telling anyone.
                         </div>
                     </div>
 
                     <div class="option-card flex items-center gap-4 cursor-pointer group" data-option="D">
                         <div class="option-circle h-14 w-14 min-w-[56px] rounded-full flex items-center justify-center font-bold text-xl">D</div>
-                        <div class="option-text flex-grow p-5 rounded-xl text-lg">
+                        <div id="optionTextD" class="option-text flex-grow p-5 rounded-xl text-lg">
                             Talk to them privately and help them find formal support.
                         </div>
                     </div>
@@ -604,85 +661,136 @@
 
 
     <!-- ======================================================================
-         Learn More：SDG 1 延伸說明頁
+         Learn More Page
          ----------------------------------------------------------------------
-         按下正確答案中的 Learn More 後顯示。
-         使用 hidden 控制顯示與隱藏，覆蓋原本首頁與 Modal。
+         這一頁會覆蓋原本畫面；按鈕放在內容最後，所以要滑到最下面才會看到。
     ====================================================================== -->
-    <section id="learnPage" class="extra-page hidden">
-        <div class="extra-content">
-            <h1 class="extra-title">No Poverty</h1>
+    <section id="learnPage" class="full-page hidden">
+        <div class="full-page-content">
+            <div class="full-page-header">
+                <img
+                    src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-1.png"
+                    class="page-sdg-icon"
+                    alt="No Poverty"
+                >
+                <h1 class="overlay-title">No Poverty</h1>
+            </div>
 
-            <div class="extra-intro">
+            <div class="learn-intro">
                 Eradicating poverty is not merely an act of charity, but a matter of justice, as everyone deserves the opportunity to live a basic and dignified life. However, nearly half of the world's population still lives in poverty, and every day people die due to a lack of food and clean water.
             </div>
 
             <div class="target-grid">
                 <div class="target-card">
                     <div class="target-number">1.1</div>
-                    <p>By 2030, eradicate extreme poverty everywhere, ensuring that no one lives on less than $1.25 per day.</p>
+                    <p>
+                        By 2030, eradicate extreme poverty everywhere, ensuring that no one lives on less than $1.25 per day.
+                    </p>
                 </div>
 
                 <div class="target-card">
                     <div class="target-number">1.2</div>
-                    <p>Reduce by at least half the proportion of men, women, and children of all ages living in poverty, according to national definitions.</p>
+                    <p>
+                        Reduce by at least half the proportion of men, women, and children of all ages living in poverty, according to national definitions.
+                    </p>
                 </div>
 
                 <div class="target-card">
                     <div class="target-number">1.3</div>
-                    <p>Implement appropriate social protection systems and measures for all, and by 2030 achieve substantial coverage of the poor and the vulnerable.</p>
+                    <p>
+                        Implement appropriate social protection systems and measures for all, and by 2030 achieve substantial coverage of the poor and the vulnerable.
+                    </p>
                 </div>
 
                 <div class="target-card">
                     <div class="target-number">1.4</div>
-                    <p>Ensure that all people, especially the poor and vulnerable, have equal rights to economic resources, access to basic services, and ownership and control over land and other forms of property, inheritance, natural resources, new technology, and financial services, including microfinance.</p>
+                    <p>
+                        Ensure that all people, especially the poor and vulnerable, have equal rights to economic resources, access to basic services, and ownership and control over land and other forms of property, inheritance, natural resources, new technology, and financial services, including microfinance.
+                    </p>
                 </div>
 
                 <div class="target-card">
                     <div class="target-number">1.5</div>
-                    <p>Build the resilience of the poor and those in vulnerable situations, reducing their exposure and vulnerability to climate-related extreme events and other economic, social, and environmental shocks and disasters.</p>
+                    <p>
+                        Build the resilience of the poor and those in vulnerable situations, reducing their exposure and vulnerability to climate-related extreme events and other economic, social, and environmental shocks and disasters.
+                    </p>
                 </div>
 
                 <div class="target-card">
                     <div class="target-number">1.A</div>
-                    <p>Mobilize significant resources from a variety of sources, including enhanced development cooperation, in order to provide adequate and predictable means for developing countries, particularly the least developed countries, to implement programs and policies to end poverty.</p>
+                    <p>
+                        Mobilize significant resources from a variety of sources, including enhanced development cooperation, in order to provide adequate and predictable means for developing countries, particularly the least developed countries, to implement programs and policies to end poverty.
+                    </p>
                 </div>
 
                 <div class="target-card">
                     <div class="target-number">1.B</div>
-                    <p>Create sound policy frameworks at the national, regional, and international levels, based on pro-poor and gender-sensitive development strategies, to support accelerated investment in poverty eradication actions.</p>
+                    <p>
+                        Create sound policy frameworks at the national, regional, and international levels, based on pro-poor and gender-sensitive development strategies, to support accelerated investment in poverty eradication actions.
+                    </p>
                 </div>
             </div>
-        </div>
 
-        <div class="page-buttons">
-            <button id="takeActionBtn" class="page-btn action">TAKE ACTION</button>
-            <button class="page-btn home homeBtn">HOME</button>
+            <div class="overlay-button-row">
+                <button id="learnBackBtn" class="overlay-btn back-btn">BACK</button>
+
+                <div class="overlay-right-buttons">
+                    <button id="actionBtn" class="overlay-btn action-btn">TAKE ACTION</button>
+                    <button id="learnHomeBtn" class="overlay-btn home-btn">HOME</button>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- ======================================================================
-         Take Action：行動建議頁
+         Take Action Page
          ----------------------------------------------------------------------
-         按下 TAKE ACTION 後顯示。
-         HOME 按鈕回到 17 個 SDGs 選項首頁。
+         這一頁會覆蓋原本畫面；HOME / BACK 按鈕也在內容最後。
     ====================================================================== -->
-    <section id="actionPage" class="extra-page hidden">
-        <div class="extra-content">
-            <h1 class="extra-title">What Can We Do</h1>
+    <section id="actionPage" class="full-page hidden">
+        <div class="full-page-content">
+            <div class="action-title-area">
+                <img
+                    src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-1.png"
+                    class="page-sdg-icon"
+                    alt="No Poverty"
+                >
+                <h1 class="overlay-title">What Can We Do</h1>
+            </div>
 
             <div class="action-grid">
-                <div class="action-card">Donate unused clothes and items to people in need.</div>
-                <div class="action-card">Choose products that support fair practices.</div>
-                <div class="action-card">Avoid wasting food in daily meals.</div>
-                <div class="action-card">Offer help to people in need when you encounter them.</div>
-                <div class="action-card">Contribute small, regular donations if possible.</div>
-                <div class="action-card">Learn about poverty issues and share them with others.</div>
-            </div>
-        </div>
+                <div class="action-card">
+                    Donate unused clothes and items to people in need.
+                </div>
 
-        <div class="page-buttons">
-            <button class="page-btn home homeBtn">HOME</button>
+                <div class="action-card">
+                    Choose products that support fair practices.
+                </div>
+
+                <div class="action-card">
+                    Avoid wasting food in daily meals.
+                </div>
+
+                <div class="action-card">
+                    Offer help to people in need when you encounter them.
+                </div>
+
+                <div class="action-card">
+                    Contribute small, regular donations if possible.
+                </div>
+
+                <div class="action-card">
+                    Learn about poverty issues and share them with others.
+                </div>
+            </div>
+
+            <div class="overlay-button-row">
+                <button id="actionBackBtn" class="overlay-btn back-btn">BACK</button>
+
+                <div class="overlay-right-buttons">
+                    <button id="actionHomeBtn" class="overlay-btn home-btn">HOME</button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -691,7 +799,7 @@
            Interaction Logic
            ----------------------------------------------------------------------
            功能說明：
-           1. 點擊 SDG 1 卡片後開啟 Modal
+           1. 點擊 SDG 卡片後開啟 Modal
            2. 點擊選項後記錄使用者答案並更新選取狀態
            3. 按下送出後依答案顯示正確或提醒訊息
            4. 支援點擊關閉按鈕或背景遮罩關閉 Modal
@@ -700,6 +808,320 @@
         document.addEventListener("DOMContentLoaded", () => {
             // 儲存目前使用者選取的答案；尚未選擇時為 null
             let selectedOption = null;
+            let currentGoal = "1";
+
+            const questions = {
+
+            1: {
+                title: "No Poverty",
+                storyNote: "A quiet change is noticed during lunch time.",
+                storyMain: "You notice that one of your classmates has recently stopped bringing lunch to school.",
+                storySub: "Over time, you realize that this is not a temporary situation — it may be due to financial difficulties at home.",
+                question: "What would be the most appropriate and respectful action?",
+                options: {
+                    A: "Tell the whole class about the situation and suggest raising money.",
+                    B: "Decide not to interfere because it is their personal matter.",
+                    C: "Quietly give them food every day without telling anyone.",
+                    D: "Talk to them privately and help them find formal support."
+                },
+                answer: "D",
+                correctFeedback: "Empathy with respect is the key to true sustainability. Seeking formal support ensures long-term stability.",
+                wrongFeedback: "Consider the privacy and dignity of the individual. Protecting their feelings is as important as the help itself."
+            },
+
+            2: {
+                title: "Zero Hunger",
+                storyNote: "Food waste and unequal distribution.",
+                storyMain: "At your part-time job, a large amount of edible food is thrown away every night. At the same time, you learn that some families in your community struggle to access enough food.",
+                storySub: "You begin to realize that the issue is not only waste, but also how food is distributed and managed.",
+                question: "Which action best aligns with sustainable food use?",
+                options: {
+                    A: "Dispose of the food",
+                    B: "Give food privately",
+                    C: "Partner with a food bank",
+                    D: "Complain online"
+                },
+                answer: "C",
+                correctFeedback: "Reducing waste is only the first step. A structured system ensures food reaches those in need.",
+                wrongFeedback: "Good intentions are not enough if the solution is not sustainable. How can food be redistributed safely and continuously?"                
+            },
+
+            3: {
+                title: "Good Health and Well-being",
+                storyNote: "The impact of long-term stress.",
+                storyMain: "A friend has been under heavy academic pressure and shows signs of fatigue and emotional distress. Even when you check in, they insist it is only temporary.",
+                storySub: "You begin to realize that early support and professional help may be important for long-term well-being.",
+                question: "Which action best promotes well-being?",
+                options: {
+                    A: "Stop mentioning it",
+                    B: "Remind them occasionally",
+                    C: "Encourage professional help",
+                    D: "Tell others"
+                },
+                answer: "C",
+                correctFeedback: "True support includes access to proper care. Professional help is key to long-term well-being.",
+                wrongFeedback: "Simply caring is not always enough. Effective support often requires professional help and proper guidance."
+            },
+
+            4: {
+                title: "Quality Education",
+                storyNote: "An invisible learning gap.",
+                storyMain: "A classmate struggles to complete assignments due to limited access to devices at home. Although they try their best, the gap continues to affect their learning.",
+                storySub: "You begin to realize that equal access to resources is essential for real learning opportunities.",
+                question: "Which action best promotes educational equality?",
+                options: {
+                    A: "Do the work for them",
+                    B: "Help them access school resources",
+                    C: "Borrow devices for them",
+                    D: "Ignore it"
+                },
+                answer: "B",
+                correctFeedback: "Education is about equal access, not just outcomes. Providing resources creates real learning opportunities.",
+                wrongFeedback: "Finishing tasks does not mean solving the problem. How can this student gain equal access to learning resources?"
+            },
+
+            5: {
+                title: "Gender Equality",
+                storyNote: "A normalized division of roles.",
+                storyMain: "In group projects, tasks are often divided based on gender without discussion. Over time, this pattern limits what each person can try or learn.",
+                storySub: "You begin to realize that fairness should come from equal opportunity, not assumptions.",
+                question: "Which action best promotes equality?",
+                options: {
+                    A: "Keep current roles",
+                    B: "Discuss privately",
+                    C: "Assign based on ability",
+                    D: "Change your own role only"
+                },
+                answer: "C",
+                correctFeedback: "Fairness comes from equal opportunity. Assigning roles by ability prevents bias and limitation.",
+                wrongFeedback: "Unspoken habits can still create inequality. Are roles being assigned fairly based on ability, not assumptions?"        
+            },
+
+            6: {
+                title: "Clean Water and Sanitation",
+                storyNote: "A commonly overlooked issue.",
+                storyMain: "You notice a water dispenser leaking continuously at school, and no one seems to pay attention. Over time, a significant amount of water is wasted.",
+                storySub: "You begin to realize that proper maintenance is as important as individual conservation.",
+                question: "Which action best solves the problem?",
+                options: {
+                    A: "Ignore it",
+                    B: "Put up signs",
+                    C: "Report for repair",
+                    D: "Post online"
+                },
+                answer: "C",
+                correctFeedback: "Effective solutions address the root cause. Proper management prevents ongoing resource loss.",
+                wrongFeedback: "Reminding others does not fix the source of the problem. What action can stop the water waste completely?"                
+            },
+
+            7: {
+                title: "Affordable and Clean Energy",
+                storyNote: "Energy use habits.",
+                storyMain: "Classrooms often leave lights and air conditioning on even when empty. Although policies exist, they are not consistently followed.",
+                storySub: "You begin to realize that improving efficiency requires better systems, not just individual effort.",
+                question: "What is the best solution?",
+                options: {
+                    A: "Do nothing",
+                    B: "Turn off individually",
+                    C: "Improve system management",
+                    D: "Remind others"
+                },
+                answer: "C",
+                correctFeedback: "Lasting impact requires system-level change. Efficient energy use depends on structured management.",
+                wrongFeedback: "Individual actions help, but the issue continues. What solution can improve energy use for everyone consistently?"           
+            },
+
+            8: {
+                title: "Decent Work and Economic Growth",
+                storyNote: "Fair working conditions.",
+                storyMain: "At your workplace, some employees are required to work overtime without proper compensation. Many remain silent because they fear losing their jobs.",
+                storySub: "You begin to realize that fair systems are necessary to protect workers’ rights.",
+                question: "What is the best action?",
+                options: {
+                    A: "Ignore it",
+                    B: "Comfort coworkers",
+                    C: "Report through proper channels",
+                    D: "Post online"
+                },
+                answer: "C",
+                correctFeedback: "Fair conditions rely on accountability. Formal action helps protect workers’ rights.",
+                wrongFeedback: "Ignoring unfair treatment allows it to continue. How can workers’ rights be protected in a proper and lasting way?"
+            },
+
+            9: {
+                title: "Industry, Innovation and Infrastructure",
+                storyNote: "An opportunity for improvement.",
+                storyMain: "Your school uses outdated systems that reduce efficiency and slow down learning processes. Some believe it is enough to just complete tasks.",
+                storySub: "You begin to realize that innovation can improve long-term outcomes for everyone.",
+                question: "What is the best action?",
+                options: {
+                    A: "Keep using it",
+                    B: "Propose improvements",
+                    C: "Quit the project",
+                    D: "Do minimum work"
+                },
+                answer: "B",
+                correctFeedback: "Progress depends on continuous improvement. Innovation begins with challenging the current system.",
+                wrongFeedback: "Doing the minimum may solve today’s task, but how can the system be improved for the future?"
+            },
+
+            10: {
+                title: "Reduced Inequalities",
+                storyNote: "Differences in participation.",
+                storyMain: "Some students participate less in discussions due to language or cultural barriers. Although unintentional, the environment limits their involvement.",
+                storySub: "You begin to realize that inclusion must be actively created.",
+                question: "What is the best action?",
+                options: {
+                    A: "Do nothing",
+                    B: "Stay in familiar groups",
+                    C: "Adjust discussion methods",
+                    D: "Let teachers handle it"
+                },
+                answer: "C",
+                correctFeedback: "Inclusion requires intentional design. Adapting the environment creates equal participation.",
+                wrongFeedback: "Inclusion does not happen automatically. What can be changed so everyone has a fair chance to participate?"                
+            },
+
+            11: {
+                title: "Sustainable Cities and Communities",
+                storyNote: "Shared responsibility.",
+                storyMain: "Recycling systems exist in your community, but many people do not follow them properly. As a result, waste management becomes ineffective.",
+                storySub: "You begin to realize that community participation is key to sustainable change.",
+                question: "What is the best solution?",
+                options: {
+                    A: "Do nothing",
+                    B: "Recycle personally",
+                    C: "Promote community awareness",
+                    D: "Complain online"
+                },
+                answer: "C",    
+                correctFeedback: "Sustainable change requires collective action. Community engagement amplifies impact.",
+                wrongFeedback: "Individual effort is important, but not enough. How can more people in the community be involved?"
+            },
+
+            12: {
+                title: "Responsible Consumption and Production",
+                storyNote: "The impact of daily choices.",
+                storyMain: "You are considering buying new items even though your current ones are still usable. At the same time, you learn about the environmental cost of overproduction.",
+                storySub: "You begin to realize that reducing consumption can be more sustainable than changing products.",
+                question: "What is the best action?",
+                options: {
+                    A: "Buy cheaper items",
+                    B: "Buy eco-friendly brands",
+                    C: "Reduce purchasing",
+                    D: "Choose randomly"
+                },
+                answer: "C",
+                correctFeedback: "The most sustainable choice may be restraint. Reducing demand lowers overall impact.",
+                wrongFeedback: "Choosing differently is one option, but is consuming less a better solution?"                
+            },
+
+            13: {
+                title: "Climate Action",
+                storyNote: "Balancing convenience and impact.",
+                storyMain: "Your class is planning an event and debates between using disposable items or more sustainable options. Convenience and cost become key concerns.",
+                storySub: "You begin to realize that practical solutions can encourage wider participation.",
+                question: "What is the best action?",
+                options: {
+                    A: "Use disposable items",
+                    B: "Fully switch to reusable",
+                    C: "Encourage bring-your-own",
+                    D: "Follow majority"
+                },
+                answer: "C",
+                correctFeedback: "Effective solutions balance impact and practicality. Wider participation leads to meaningful change.",
+                wrongFeedback: "A solution must be practical for everyone. How can environmental impact be reduced while keeping participation high?"                
+            },
+
+            14: {
+                title: "Life Below Water",
+                storyNote: "Hidden environmental impact.",
+                storyMain: "You regularly use single-use plastics without much thought. Later, you learn that these habits contribute to ocean pollution.",
+                storySub: "You begin to realize that small daily actions can have large environmental consequences.",
+                question: "What is the best action?",
+                options: {
+                    A: "Continue habits",
+                    B: "Reduce plastic use",
+                    C: "Occasional reduction",
+                    D: "Wait for policy"
+                },
+                answer: "B",
+                correctFeedback: "Prevention starts at the source. Reducing plastic use protects marine ecosystems.",
+                wrongFeedback: "Ocean pollution often starts from everyday habits. What action directly reduces plastic entering the ocean?"                
+            },
+
+            15: {
+                title: "Life on Land",
+                storyNote: "Human impact on nature.",
+                storyMain: "During outdoor activities, you see people leaving trash behind. Even with bins available, not everyone uses them properly.",
+                storySub: "You begin to realize that protecting ecosystems requires both action and influence.",
+                question: "What is the best action?",
+                options: {
+                    A: "Do nothing",
+                    B: "Clean your own",
+                    C: "Maintain and remind others",
+                    D: "Complain only"
+                },
+                answer: "C",
+                correctFeedback: "Impact grows when actions influence others. Protecting ecosystems requires shared responsibility.",
+                wrongFeedback: "Protecting the environment is not only personal. How can your actions influence others as well?"                
+            },
+
+            16: {
+                title: "Peace, Justice and Strong Institutions",
+                storyNote: "Fairness in systems.",
+                storyMain: "A group member contributes little but receives equal credit in a project. This creates tension and a sense of unfairness.",
+                storySub: "You begin to realize that fair systems require accountability.",
+                question: "What is the best action?",
+                options: {
+                    A: "Say nothing",
+                    B: "Complain privately",
+                    C: "Report properly",
+                    D: "Accept it"
+                },
+                answer: "C",
+                correctFeedback: "Fair systems depend on accountability. Speaking up helps maintain justice.",
+                wrongFeedback: "Silence may seem easier, but how can fairness be ensured for everyone?"
+            },
+
+            17: {
+                title: "Partnerships for the Goals",
+                storyNote: "Collaboration challenges.",
+                storyMain: "Different teams in a project struggle to agree on how to proceed. Miscommunication slows progress.",
+                storySub: "You begin to realize that coordination is essential for successful collaboration.",
+                question: "What is the best action?",
+                options: {
+                    A: "Work separately",
+                    B: "Give up",
+                    C: "Improve communication",
+                    D: "Focus on own task"
+                },
+                answer: "C",
+                correctFeedback: "Strong collaboration requires alignment. Communication is key to shared success.",
+                wrongFeedback: "Working separately may avoid conflict, but does it solve the collaboration problem?"                
+            }
+
+            };
+            function loadQuestion(goal) {
+                const q = questions[goal];
+
+                document.getElementById("modalTitle").innerText = q.title;
+                document.getElementById("modalGoalLabel").innerText =
+                    `GOAL ${String(goal).padStart(2, "0")} / 17 Sustainable Development Goals`;
+
+                document.getElementById("modalImg").src =
+                    `https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-${goal}.png`;
+
+                document.getElementById("storyNote").innerText = q.storyNote;
+                document.getElementById("storyMain").innerText = q.storyMain;
+                document.getElementById("storySub").innerText = q.storySub;
+                document.getElementById("questionText").innerText = q.question;
+
+                document.getElementById("optionTextA").innerText = q.options.A;
+                document.getElementById("optionTextB").innerText = q.options.B;
+                document.getElementById("optionTextC").innerText = q.options.C;
+                document.getElementById("optionTextD").innerText = q.options.D;
+            }
 
             // 快取常用 DOM 元素，避免重複查詢並提升程式可讀性
             const modal = document.getElementById("modal");
@@ -708,23 +1130,24 @@
             const nextBtn = document.getElementById("nextBtn");
             const sdgCards = document.querySelectorAll(".sdg-card");
             const optionCards = document.querySelectorAll(".option-card");
+
             const learnPage = document.getElementById("learnPage");
             const actionPage = document.getElementById("actionPage");
-            const takeActionBtn = document.getElementById("takeActionBtn");
-            const homeBtns = document.querySelectorAll(".homeBtn");
+            const learnBackBtn = document.getElementById("learnBackBtn");
+            const actionBtn = document.getElementById("actionBtn");
+            const learnHomeBtn = document.getElementById("learnHomeBtn");
+            const actionBackBtn = document.getElementById("actionBackBtn");
+            const actionHomeBtn = document.getElementById("actionHomeBtn");
 
             /**
-             * 開啟 SDG 1 互動視窗。
-             * 目前互動題目僅配置於 SDG 1，因此需先判斷 data-title。
+             * 開啟 SDG 互動視窗。
              */
             sdgCards.forEach((card) => {
                 card.addEventListener("click", () => {
-                    const title = card.getAttribute("data-title");
-
-                    if (title.includes("SDG 1")) {
-                        modal.style.display = "flex";
-                        resetModal();
-                    }
+                    currentGoal = card.dataset.goal;
+                    loadQuestion(currentGoal);
+                    modal.style.display = "flex";
+                    resetModal();
                 });
             });
 
@@ -744,7 +1167,6 @@
 
             /**
              * 送出答案並顯示回饋。
-             * 正確答案為 D：私下關心並協助尋求正式支持。
              */
             nextBtn.addEventListener("click", () => {
                 if (!selectedOption) {
@@ -756,35 +1178,40 @@
                     return;
                 }
 
-                if (selectedOption === "D") {
+                if (selectedOption === questions[currentGoal].answer) {
+                    const learnMoreButton = currentGoal === "1"
+                        ? `<button id="learnMoreBtn" class="learn-more-btn">Learn More</button>`
+                        : "";
+
                     resultBox.innerHTML = `
                         <div class="p-6 rounded-xl bg-[#A3B18A]/20 text-[#A3B18A] border-2 border-[#A3B18A] shadow-lg">
                             <h4 class="font-bold text-xl mb-1">✅ Excellent choice!</h4>
                             <p class="text-white/90">
-                                Empathy with respect is the key to true sustainability. Seeking formal support ensures long-term stability.
+                                ${questions[currentGoal].correctFeedback}
                             </p>
-                            <button id="learnMoreBtn" class="learn-more-btn">Learn More</button>
+                            ${learnMoreButton}
                         </div>
                     `;
 
-                    document.getElementById("learnMoreBtn").addEventListener("click", () => {
-                        modal.style.display = "none";
-                        learnPage.classList.remove("hidden");
-                        actionPage.classList.add("hidden");
-                        window.scrollTo(0, 0);
-                    });
+                    if (currentGoal === "1") {
+                        document.getElementById("learnMoreBtn").addEventListener("click", () => {
+                            modal.style.display = "none";
+                            learnPage.classList.remove("hidden");
+                            actionPage.classList.add("hidden");
+                            learnPage.scrollTop = 0;
+                        });
+                    }
                 } else {
                     resultBox.innerHTML = `
                         <div class="p-6 rounded-xl bg-[#D68C7A]/20 text-[#D68C7A] border-2 border-[#D68C7A] shadow-lg">
                             <h4 class="font-bold text-xl mb-1">⚠️ Think again...</h4>
                             <p class="text-white/90">
-                                Consider the privacy and dignity of the individual. Protecting their feelings is as important as the help itself.
+                                ${questions[currentGoal].wrongFeedback}
                             </p>
                         </div>
                     `;
                 }
             });
-
             /**
              * 關閉 Modal。
              * 點擊右上角關閉按鈕時隱藏互動視窗。
@@ -795,7 +1222,6 @@
 
             /**
              * 點擊 Modal 背景遮罩時關閉視窗。
-             * 透過判斷事件目標是否為最外層 modal，避免點擊內容區時誤關閉。
              */
             modal.addEventListener("click", (event) => {
                 if (event.target.id === "modal") {
@@ -803,31 +1229,34 @@
                 }
             });
 
+            learnBackBtn.addEventListener("click", () => {
+                learnPage.classList.add("hidden");
+                actionPage.classList.add("hidden");
+                modal.style.display = "flex";
+                learnPage.scrollTop = 0;
+            });
 
-
-            /**
-             * 開啟 Take Action 頁面。
-             * 從 Learn More 頁面切換到行動建議頁，並覆蓋原本畫面。
-             */
-            takeActionBtn.addEventListener("click", () => {
+            actionBtn.addEventListener("click", () => {
                 learnPage.classList.add("hidden");
                 actionPage.classList.remove("hidden");
-                modal.style.display = "none";
-                window.scrollTo(0, 0);
+                actionPage.scrollTop = 0;
             });
 
-            /**
-             * HOME 按鈕：回到 17 個 SDGs 選項首頁。
-             * 關閉 Learn More、Take Action 與 Modal。
-             */
-            homeBtns.forEach((button) => {
-                button.addEventListener("click", () => {
-                    learnPage.classList.add("hidden");
-                    actionPage.classList.add("hidden");
-                    modal.style.display = "none";
-                    window.scrollTo(0, 0);
-                });
+            actionBackBtn.addEventListener("click", () => {
+                actionPage.classList.add("hidden");
+                learnPage.classList.remove("hidden");
+                learnPage.scrollTop = 0;
             });
+
+            learnHomeBtn.addEventListener("click", goHome);
+            actionHomeBtn.addEventListener("click", goHome);
+
+            function goHome() {
+                modal.style.display = "none";
+                learnPage.classList.add("hidden");
+                actionPage.classList.add("hidden");
+                window.scrollTo(0, 0);
+            }
 
             /**
              * 重置 Modal 狀態。
