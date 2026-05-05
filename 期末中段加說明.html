@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -527,5 +527,40 @@
                         <button id="learnMoreBtn" class="learn-more-btn">
                             Learn More
                         </button>
+                    </div>
+                `;
+
+                document.getElementById("learnMoreBtn").addEventListener("click", function() {
+                    questionPage.classList.add("hidden");
+                    learnPage.classList.remove("hidden");
+                });
+
+            } else {
+                resultBox.innerHTML = `
+                    <div class="wrong-box">
+                        <div class="result-title">
+                            Think again...
+                        </div>
+
+                        <div class="result-text">
+                            Consider the privacy and dignity of the individual.
+                            Protecting their feelings is as important as the help itself.
+                        </div>
+                    </div>
+                `;
+            }
+
+        });
+
+        homeBtn.addEventListener("click", function() {
+            learnPage.classList.add("hidden");
+            questionPage.classList.remove("hidden");
+        });
+
+        actionBtn.addEventListener("click", function() {
+            alert("Start with respect: care privately, protect dignity, and connect people with proper support.");
+        });
+    </script>
+
 </body>
 </html>
